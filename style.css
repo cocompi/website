@@ -103,6 +103,7 @@ h2 {
   grid-template-columns: 1fr auto 1fr;
   column-gap: 2rem;
   align-items: start;
+  padding-bottom: 1rem;
 }
 
 .nav-left,
