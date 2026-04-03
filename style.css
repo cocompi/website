@@ -1,27 +1,42 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   BASE TYPOGRAPHY
-========================= */
+/* BASE */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: #111;
-  background: #fff;
   padding: 20px;
-  line-height: 1.4;
+  background: #fff;
 }
 
-/* =========================
-   LINKS
-========================= */
+/* NAV */
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  margin-bottom: 10px;
+}
+
+.nav-left, .nav-right {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.nav-center {
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: 6px;
+}
+
+.nav-right {
+  text-align: right;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -31,115 +46,73 @@ a:hover {
   text-decoration: underline;
 }
 
-/* =========================
-   NAVBAR
-========================= */
-.nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: start;
-  margin-bottom: 10px;
-}
-
-.nav-left {
-  text-align: left;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.nav-center {
-  text-align: center;
-  font-size: 34px;
-  letter-spacing: 6px;
-}
-
-.nav-right {
-  text-align: right;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* =========================
-   DIVIDER
-========================= */
+/* DIVIDER */
 hr {
   border: none;
   border-top: 1px solid #ccc;
   margin: 10px 0;
 }
 
-/* =========================
-   ROLES ROW
-========================= */
+/* ROLES */
 .roles {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 11px;
+  margin-bottom: 25px;
   color: #444;
-  margin-bottom: 30px;
 }
 
-/* =========================
-   SECTION TITLES
-========================= */
+/* TITLES */
 h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: normal;
-  margin: 20px 0 15px;
+  margin: 25px 0 10px;
 }
 
-/* =========================
-   GRID SYSTEM
-========================= */
+/* GRID */
 .grid {
   display: grid;
-  gap: 15px;
-  margin-bottom: 40px;
+  gap: 12px;
+  margin-bottom: 35px;
 }
 
-/* VR layout */
 .grid-3 {
   grid-template-columns: 1fr 1fr 2fr;
 }
 
-/* Film layout */
 .grid-5 {
   grid-template-columns: repeat(5, 1fr);
 }
 
-/* =========================
-   ITEMS
-========================= */
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ITEMS */
 .item img {
   width: 100%;
-  height: auto;
   display: block;
-  background: #eee; /* placeholder until images load */
 }
 
 .item p {
-  font-size: 11px;
-  margin-top: 6px;
+  font-size: 10px;
+  margin-top: 5px;
   text-align: center;
 }
 
-/* =========================
-   OPTIONAL: WIDE ITEM CONTROL
-========================= */
-.wide {
+/* LARGE IMAGE */
+.large {
   grid-column: span 1;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 900px) {
-  .grid-3 {
-    grid-template-columns: 1fr;
+  .grid-5, .grid-4 {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .grid-5 {
-    grid-template-columns: 1fr 1fr;
+  .grid-3 {
+    grid-template-columns: 1fr;
   }
 
   .roles {
@@ -149,11 +122,10 @@ h2 {
 
   .nav {
     grid-template-columns: 1fr;
-    gap: 10px;
     text-align: center;
+    gap: 10px;
   }
 
-  .nav-left,
   .nav-right {
     text-align: center;
   }
