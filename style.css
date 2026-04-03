@@ -20,7 +20,7 @@ body {
 
 .bodycopy {
   font-family: "Inter", -apple-system, sans-serif;
-  font-size: 10px;
+  font-size: 1.3em;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.75);
 
@@ -41,13 +41,13 @@ body {
 
 .caption {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
+  font-size: 1.3em;
   font-weight: 500;
 
   color: rgba(0, 0, 0, 0.75);
 
   line-height: 1;
-  letter-spacing: 0em;
+  letter-spacing: 0.1em;
   display: block;
 }
 
