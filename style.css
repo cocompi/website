@@ -155,27 +155,23 @@ hr {
 }
 
 /* =========================
-   ITEMS
+   ITEMS (Cargo media-item translation)
 ========================= */
 
+/* Image container */
 .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+
+  border: none;
+  padding: 0;
 }
 
-.grid-3 .item {
-  aspect-ratio: 4 / 3;
-}
-
-.grid-3 .item:last-child {
-  aspect-ratio: 16 / 9;
-}
-
-.item p {
-  margin-top: 4px;
-  text-align: center;
+/* Caption spacing (important subtle fix) */
+.item .caption {
+  margin-top: 0.5em;
 }
 
 /* =========================
