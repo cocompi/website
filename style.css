@@ -41,13 +41,13 @@ body {
 
 .caption {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 1.3em;
+  font-size: 2em;
   font-weight: 500;
 
   color: rgba(0, 0, 0, 0.75);
 
   line-height: 1;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.3em;
   display: block;
 }
 
