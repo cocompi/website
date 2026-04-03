@@ -6,28 +6,23 @@
 }
 
 /* =========================
-   BASE
+   BASE TYPOGRAPHY (Inter)
 ========================= */
 
 body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background: #fff;
   padding: 18px 22px;
 }
 
-/* =========================
-   CARGO BODYCOPY (translated)
-========================= */
-
+/* CARGO BODYCOPY TRANSLATION */
 .bodycopy {
-  font-size: 13px; /* approx 1.3rem scaled down */
+  font-size: 13px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.75);
 
-  /* fallback system */
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-
   line-height: 1.2;
-  letter-spacing: 0em;
+  letter-spacing: -0.01em; /* Inter needs slight tightening */
 }
 
 .bodycopy a {
@@ -62,9 +57,8 @@ body {
 
 .nav-center h1 {
   font-size: 30px;
-  font-weight: normal;
-  letter-spacing: 8px;
-  margin-top: -2px;
+  font-weight: 500;
+  letter-spacing: 0.35em; /* key Cargo-like spacing */
 
   filter: drop-shadow(-1px -1px 0 rgba(0,0,0,0.2));
 }
@@ -95,7 +89,7 @@ hr {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: rgba(0,0,0,0.7);
+  color: rgba(0,0,0,0.65);
   margin-bottom: 16px;
 }
 
@@ -105,7 +99,7 @@ hr {
 
 h2 {
   font-size: 26px;
-  font-weight: normal;
+  font-weight: 500;
   margin: 16px 0 10px;
   color: rgba(0,0,0,0.85);
 }
@@ -147,7 +141,7 @@ h2 {
   font-size: 10px;
   margin-top: 4px;
   text-align: center;
-  color: rgba(0,0,0,0.7);
+  color: rgba(0,0,0,0.65);
 }
 
 /* =========================
@@ -168,145 +162,6 @@ h2 {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 8px;
-  }
-
-  .nav-right {
-    text-align: center;
-  }
-}.nav-right {
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-/* CENTER TITLE */
-.nav-center {
-  text-align: center;
-}
-
-.nav-center h1 {
-  font-size: 30px;
-  font-weight: normal;
-  letter-spacing: 8px;
-  margin-top: -2px;
-
-  /* more subtle shadow */
-  filter: drop-shadow(-1px -1px 0 rgba(0,0,0,0.2));
-}
-
-.nav-center a {
-  text-decoration: none;
-  color: black;
-}
-
-/* RIGHT ALIGN */
-.nav-right {
-  text-align: right;
-}
-
-/* LINKS */
-a {
-  color: black;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* DIVIDER */
-hr {
-  border: none;
-  border-top: 1px solid #d0d0d0;
-  margin: 8px 0 6px;
-}
-
-/* ROLES */
-.roles {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #555;
-  margin-bottom: 18px;
-}
-
-/* TITLES */
-h2 {
-  font-size: 26px;
-  font-weight: normal;
-  margin: 18px 0 12px;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  gap: 10px; /* tighter like Cargo */
-  margin-bottom: 28px;
-}
-
-/* VR layout */
-.grid-3 {
-  grid-template-columns: 1fr 1fr 2.2fr; /* slightly wider last column */
-}
-
-/* FILM */
-.grid-5 {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-/* 4-col sections */
-.grid-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/* IMAGE CONTAINERS */
-.item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* KEY FIX: enforce aspect ratios */
-.grid-3 .item {
-  aspect-ratio: 4 / 3;
-}
-
-.grid-3 .item:last-child {
-  aspect-ratio: 16 / 9; /* large VR piece */
-}
-
-.grid-5 .item,
-.grid-4 .item {
-  aspect-ratio: 1 / 1;
-}
-
-/* CAPTIONS */
-.item p {
-  font-size: 10px;
-  margin-top: 4px;
-  text-align: center;
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .grid-5,
-  .grid-4 {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .roles {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .nav {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    text-align: center;
   }
 
   .nav-right {
