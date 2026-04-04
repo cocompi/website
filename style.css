@@ -175,7 +175,6 @@ hr {
   gap: 10px;
   margin-bottom: 10px;
   flex-wrap: nowrap;  /* IMPORTANT */
-
   align-items: flex-start;
   width: 100%;
 }
