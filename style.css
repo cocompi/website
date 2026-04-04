@@ -162,38 +162,35 @@ hr {
 }
 
 /* =========================
-   GRID
+   GALLERY (Cargo system)
 ========================= */
 
-.grid {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 28px;
-  align-items: start;
-}
-
-.grid-3 {
-  grid-template-columns: 1fr 1fr 2.2fr;
-}
-
-/* =========================
-   ITEMS (Cargo media-item translation)
-========================= */
-.item {
+.gallery {
   width: 100%;
 }
 
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
-/* Image container */
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 .item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-/* Caption spacing (important subtle fix) */
 .item .caption {
-  margin-top: 0.5em;
+  margin-top: 6px;
+  text-align: center;
 }
 
 /* =========================
