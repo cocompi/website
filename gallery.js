@@ -6,10 +6,12 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     const containerWidth = gallery.clientWidth;
 
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
+
+    // 🔴 CRITICAL FIX: clamp height HARD
     const targetRowHeight = Math.min(
-  window.innerHeight * rowHeightFactor,
-  180   // HARD CAP (critical)
-);
+      window.innerHeight * rowHeightFactor,
+      160   // ← THIS fixes your issue
+    );
 
     let newHTML = "";
     let row = [];
@@ -18,15 +20,19 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     items.forEach((item, index) => {
       const img = item.querySelector("img");
 
+      if (!img.naturalWidth) return; // safety
+
       const aspect = img.naturalWidth / img.naturalHeight;
 
       row.push({ item, aspect });
       rowAspectSum += aspect;
 
-      const rowWidth = rowAspectSum * targetRowHeight;
+      const gapTotal = (row.length - 1) * 10;
+      const rowWidth = rowAspectSum * targetRowHeight + gapTotal;
 
-     if (rowWidth >= containerWidth && row.length > 1)
-        const gapTotal = (row.length - 1) * 10; // match CSS gap
+      // 🔴 CRITICAL FIX: require at least 2 items
+      if (rowWidth >= containerWidth && row.length > 1) {
+
         const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
         newHTML += `<div class="row">`;
@@ -48,7 +54,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       }
     });
 
-    // LAST ROW (no stretch)
+    // LAST ROW (not stretched)
     if (row.length) {
       newHTML += `<div class="row">`;
 
@@ -74,36 +80,4 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     window._resizeTimer = setTimeout(layout, 100);
   });
 
-});      });
-
-      gallery.appendChild(rowDiv);
-
-      row = [];
-      rowAspectSum = 0;
-    }
-  });
-
-  // last row (not stretched)
-  if (row.length) {
-    const rowDiv = document.createElement("div");
-    rowDiv.className = "row";
-
-    row.forEach(r => {
-      const el = r.item;
-
-      el.style.width = (r.aspect * targetRowHeight) + "px";
-      el.style.height = targetRowHeight + "px";
-
-      rowDiv.appendChild(el);
-    });
-
-    gallery.appendChild(rowDiv);
-  }
-}
-
-/* EVENTS */
-window.addEventListener("load", layoutGallery);
-window.addEventListener("resize", () => {
-  clearTimeout(window._galleryResize);
-  window._galleryResize = setTimeout(layoutGallery, 100);
 });
