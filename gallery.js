@@ -6,7 +6,10 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     const containerWidth = gallery.clientWidth;
 
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
-    const targetRowHeight = window.innerHeight * rowHeightFactor;
+    const targetRowHeight = Math.min(
+  window.innerHeight * rowHeightFactor,
+  180   // HARD CAP (critical)
+);
 
     let newHTML = "";
     let row = [];
@@ -22,8 +25,9 @@ document.querySelectorAll(".gallery").forEach(gallery => {
 
       const rowWidth = rowAspectSum * targetRowHeight;
 
-      if (rowWidth >= containerWidth) {
-        const newHeight = containerWidth / rowAspectSum;
+     if (rowWidth >= containerWidth && row.length > 1)
+        const gapTotal = (row.length - 1) * 10; // match CSS gap
+        const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
         newHTML += `<div class="row">`;
 
