@@ -1,63 +1,69 @@
 const gallery = document.getElementById("gallery");
 const items = Array.from(gallery.querySelectorAll(".item"));
 
-const targetRowHeight = 220; // tweak this (Cargo ≈ 12%)
+const targetRowHeight = 220; // adjust
 
 function layoutGallery() {
-  gallery.innerHTML = "";
+  const containerWidth = gallery.clientWidth;
 
   let row = [];
-  let rowWidth = 0;
+  let rowAspectSum = 0;
 
-  items.forEach(item => {
+  gallery.innerHTML = "";
+
+  items.forEach((item, index) => {
     const img = item.querySelector("img");
 
-    const aspectRatio = img.naturalWidth / img.naturalHeight;
-    const width = aspectRatio * targetRowHeight;
+    const aspect = img.naturalWidth / img.naturalHeight;
 
-    row.push({ item, aspectRatio });
-    rowWidth += width;
+    row.push({ item, aspect });
+    rowAspectSum += aspect;
 
-    const galleryWidth = gallery.clientWidth;
+    const rowWidth = rowAspectSum * targetRowHeight;
 
-    if (rowWidth >= galleryWidth) {
-      const rowHeight = galleryWidth / row.reduce((sum, r) => sum + r.aspectRatio, 0);
+    if (rowWidth >= containerWidth) {
+      const newHeight = containerWidth / rowAspectSum;
 
       const rowDiv = document.createElement("div");
       rowDiv.className = "row";
 
       row.forEach(r => {
-        const div = r.item;
-        div.style.height = rowHeight + "px";
-        div.style.flex = "0 0 auto";   // prevent flex distortion
+        const el = r.item;
 
-        rowDiv.appendChild(div);
+        el.style.width = (r.aspect * newHeight) + "px";
+        el.style.height = newHeight + "px";
+
+        rowDiv.appendChild(el);
       });
 
       gallery.appendChild(rowDiv);
 
       row = [];
-      rowWidth = 0;
+      rowAspectSum = 0;
     }
   });
 
-  // leftover row
+  // last row (not stretched)
   if (row.length) {
     const rowDiv = document.createElement("div");
     rowDiv.className = "row";
 
     row.forEach(r => {
-      const div = r.item;
-      div.style.height = rowHeight + "px";
-      div.style.flex = "0 0 auto";   // prevent flex distortion
+      const el = r.item;
 
-      rowDiv.appendChild(div);
+      el.style.width = (r.aspect * targetRowHeight) + "px";
+      el.style.height = targetRowHeight + "px";
+
+      rowDiv.appendChild(el);
     });
 
     gallery.appendChild(rowDiv);
   }
 }
 
-/* Wait for images */
+/* EVENTS */
 window.addEventListener("load", layoutGallery);
-window.addEventListener("resize", layoutGallery);
+window.addEventListener("resize", () => {
+  clearTimeout(window._galleryResize);
+  window._galleryResize = setTimeout(layoutGallery, 100);
+});
