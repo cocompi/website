@@ -29,7 +29,7 @@ function layoutGallery() {
       row.forEach(r => {
         const div = r.item;
         div.style.height = rowHeight + "px";
-        div.style.flex = r.aspectRatio;
+        div.style.flex = "0 0 auto";   // prevent flex distortion
 
         rowDiv.appendChild(div);
       });
