@@ -1,9 +1,17 @@
 document.querySelectorAll(".gallery").forEach(gallery => {
 
+  // 🔴 STORE ORIGINAL HTML ONCE
+  const originalHTML = gallery.innerHTML;
+
+  function getOriginalItems() {
+    const temp = document.createElement("div");
+    temp.innerHTML = originalHTML;
+    return Array.from(temp.querySelectorAll(".item"));
+  }
+
   function layout() {
 
-    // 🔴 ALWAYS READ CURRENT DOM (your original behavior — keep this)
-    const items = Array.from(gallery.querySelectorAll(".item"));
+    const items = getOriginalItems(); // 🔴 ALWAYS ORIGINAL
 
     const containerWidth = gallery.clientWidth;
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
@@ -58,7 +66,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       }
     });
 
-    // LAST ROW (always justified)
+    // LAST ROW (justified)
     if (row.length) {
       const gapTotal = (row.length - 1) * 10;
       const finalHeight = (containerWidth - gapTotal) / rowAspectSum;
@@ -84,7 +92,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     gallery.innerHTML = newHTML;
   }
 
-  // 🔴 FIX 1: reliable image loading
+  // 🔴 WAIT FOR IMAGES (CRITICAL)
   function waitForImages(callback) {
     const images = gallery.querySelectorAll("img");
     let loaded = 0;
@@ -99,11 +107,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
         loaded++;
         if (loaded === images.length) callback();
       } else {
-        img.onload = () => {
-          loaded++;
-          if (loaded === images.length) callback();
-        };
-        img.onerror = () => {
+        img.onload = img.onerror = () => {
           loaded++;
           if (loaded === images.length) callback();
         };
@@ -111,14 +115,12 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     });
   }
 
-  // 🔴 INITIAL LOAD (delayed slightly → fixes first row bug)
+  // INITIAL LOAD
   window.addEventListener("load", () => {
-    setTimeout(() => {
-      waitForImages(layout);
-    }, 50);
+    setTimeout(() => waitForImages(layout), 50);
   });
 
-  // 🔴 FIX 2: resize (debounced + forced reflow)
+  // 🔴 RESIZE FIX (key)
   let resizeTimeout;
 
   window.addEventListener("resize", () => {
@@ -127,174 +129,6 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     resizeTimeout = setTimeout(() => {
       layout();
     }, 120);
-  });
-
-});
-        const newHeight = (containerWidth - gapTotal) / rowAspectSum;
-
-        newHTML += `<div class="row">`;
-
-        row.forEach(r => {
-          const width = r.aspect * newHeight;
-
-          newHTML += `
-            <div class="item" style="width:${width}px">
-              <div class="media" style="height:${newHeight}px">
-                ${r.item.querySelector(".media").innerHTML}
-              </div>
-              ${r.item.querySelector(".caption").outerHTML}
-            </div>
-          `;
-        });
-
-        newHTML += `</div>`;
-
-        row = [];
-        rowAspectSum = 0;
-      }
-    });
-
-    // 🔴 LAST ROW (always justified like Cargo)
-    if (row.length) {
-      const gapTotal = (row.length - 1) * 10;
-      const finalHeight = (containerWidth - gapTotal) / rowAspectSum;
-
-      newHTML += `<div class="row">`;
-
-      row.forEach(r => {
-        const width = r.aspect * finalHeight;
-
-        newHTML += `
-          <div class="item" style="width:${width}px">
-            <div class="media" style="height:${finalHeight}px">
-              ${r.item.querySelector(".media").innerHTML}
-            </div>
-            ${r.item.querySelector(".caption").outerHTML}
-          </div>
-        `;
-      });
-
-      newHTML += `</div>`;
-    }
-
-    gallery.innerHTML = newHTML;
-  }
-
-  // 🔴 WAIT FOR IMAGES (robust)
-  function waitForImages(callback) {
-    const images = gallery.querySelectorAll("img");
-    let loaded = 0;
-
-    if (images.length === 0) {
-      callback();
-      return;
-    }
-
-    images.forEach(img => {
-      if (img.complete) {
-        loaded++;
-        if (loaded === images.length) callback();
-      } else {
-        img.onload = () => {
-          loaded++;
-          if (loaded === images.length) callback();
-        };
-        img.onerror = () => {
-          loaded++;
-          if (loaded === images.length) callback();
-        };
-      }
-    });
-  }
-
-  window.addEventListener("load", () => {
-    waitForImages(layout);
-  });
-
-  // 🔴 RESIZE (debounced + stable)
-  let resizeTimeout;
-
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      layout();
-    }, 120);
-  });
-
-});
-        newHTML += `<div class="row">`;
-
-        row.forEach(r => {
-          const width = r.aspect * newHeight;
-
-          newHTML += `
-            <div class="item" style="width:${width}px">
-              <div class="media" style="height:${newHeight}px">
-                ${r.item.querySelector(".media").innerHTML}
-              </div>
-              ${r.item.querySelector(".caption").outerHTML}
-            </div>
-          `;
-        });
-
-        newHTML += `</div>`;
-
-        row = [];
-        rowAspectSum = 0;
-      }
-    });
-
-    // LAST ROW (always justified)
-    if (row.length) {
-
-      const gapTotal = (row.length - 1) * 10;
-      const finalHeight = (containerWidth - gapTotal) / rowAspectSum;
-
-      newHTML += `<div class="row">`;
-
-      row.forEach(r => {
-        const width = r.aspect * finalHeight;
-
-        newHTML += `
-          <div class="item" style="width:${width}px">
-            <div class="media" style="height:${finalHeight}px">
-              ${r.item.querySelector(".media").innerHTML}
-            </div>
-            ${r.item.querySelector(".caption").outerHTML}
-          </div>
-        `;
-      });
-
-      newHTML += `</div>`;
-    }
-
-    gallery.innerHTML = newHTML;
-  }
-
-  // WAIT FOR IMAGES
-  window.addEventListener("load", () => {
-    const images = gallery.querySelectorAll("img");
-
-    let loaded = 0;
-
-    images.forEach(img => {
-      if (img.complete) {
-        loaded++;
-      } else {
-        img.onload = () => {
-          loaded++;
-          if (loaded === images.length) layout();
-        };
-      }
-    });
-
-    if (loaded === images.length) layout();
-  });
-
-  // RESIZE
-  window.addEventListener("resize", () => {
-    clearTimeout(window._resizeTimer);
-    window._resizeTimer = setTimeout(layout, 100);
   });
 
 });
