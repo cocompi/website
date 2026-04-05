@@ -167,7 +167,7 @@ hr {
 
 .roles {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 22px;
 }
 
