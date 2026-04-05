@@ -76,13 +76,6 @@ h1 a {
   text-decoration: none;
 }
 
-.nav-center h1 {
-  font-family: "Inter", sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.25em;
-  filter: drop-shadow(-3px -3px 0 rgba(0, 0, 0, 0.25));
-}
-
 /* Section titles */
 h2 {
   font-family: "Inter", -apple-system, sans-serif;
