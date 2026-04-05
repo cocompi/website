@@ -1,11 +1,11 @@
 document.querySelectorAll(".gallery").forEach(gallery => {
 
-  // 🔴 STORE ORIGINAL ITEMS (critical fix)
-  const originalItems = Array.from(gallery.querySelectorAll(".item"));
-
   function layout() {
-    const containerWidth = gallery.clientWidth;
 
+    // 🔴 ALWAYS READ CURRENT DOM (your original behavior — keep this)
+    const items = Array.from(gallery.querySelectorAll(".item"));
+
+    const containerWidth = gallery.clientWidth;
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
 
     const targetRowHeight = Math.min(
@@ -17,10 +17,9 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     let row = [];
     let rowAspectSum = 0;
 
-    const minItemsPerRow = Math.min(3, originalItems.length);
+    const minItemsPerRow = Math.min(3, items.length);
 
-    // 🔴 ALWAYS USE ORIGINAL ITEMS
-    originalItems.forEach(item => {
+    items.forEach(item => {
       const img = item.querySelector("img");
 
       if (!img || !img.naturalWidth) return;
@@ -35,6 +34,102 @@ document.querySelectorAll(".gallery").forEach(gallery => {
 
       if (rowWidth >= containerWidth && row.length >= minItemsPerRow) {
 
+        const newHeight = (containerWidth - gapTotal) / rowAspectSum;
+
+        newHTML += `<div class="row">`;
+
+        row.forEach(r => {
+          const width = r.aspect * newHeight;
+
+          newHTML += `
+            <div class="item" style="width:${width}px">
+              <div class="media" style="height:${newHeight}px">
+                ${r.item.querySelector(".media").innerHTML}
+              </div>
+              ${r.item.querySelector(".caption").outerHTML}
+            </div>
+          `;
+        });
+
+        newHTML += `</div>`;
+
+        row = [];
+        rowAspectSum = 0;
+      }
+    });
+
+    // LAST ROW (always justified)
+    if (row.length) {
+      const gapTotal = (row.length - 1) * 10;
+      const finalHeight = (containerWidth - gapTotal) / rowAspectSum;
+
+      newHTML += `<div class="row">`;
+
+      row.forEach(r => {
+        const width = r.aspect * finalHeight;
+
+        newHTML += `
+          <div class="item" style="width:${width}px">
+            <div class="media" style="height:${finalHeight}px">
+              ${r.item.querySelector(".media").innerHTML}
+            </div>
+            ${r.item.querySelector(".caption").outerHTML}
+          </div>
+        `;
+      });
+
+      newHTML += `</div>`;
+    }
+
+    gallery.innerHTML = newHTML;
+  }
+
+  // 🔴 FIX 1: reliable image loading
+  function waitForImages(callback) {
+    const images = gallery.querySelectorAll("img");
+    let loaded = 0;
+
+    if (images.length === 0) {
+      callback();
+      return;
+    }
+
+    images.forEach(img => {
+      if (img.complete) {
+        loaded++;
+        if (loaded === images.length) callback();
+      } else {
+        img.onload = () => {
+          loaded++;
+          if (loaded === images.length) callback();
+        };
+        img.onerror = () => {
+          loaded++;
+          if (loaded === images.length) callback();
+        };
+      }
+    });
+  }
+
+  // 🔴 INITIAL LOAD (delayed slightly → fixes first row bug)
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      waitForImages(layout);
+    }, 50);
+  });
+
+  // 🔴 FIX 2: resize (debounced + forced reflow)
+  let resizeTimeout;
+
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(() => {
+      layout();
+    }, 120);
+  });
+
+});
         const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
         newHTML += `<div class="row">`;
