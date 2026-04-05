@@ -96,7 +96,6 @@ h2 {
 
   margin: 18px 0 18px;
 }
-}
 
 /* =========================
    NAV
@@ -166,13 +165,17 @@ hr {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+
+  min-height: 40px;     /* 🔴 important */
   margin-bottom: 22px;
+
+  font-size: 12px;
+  letter-spacing: 0.03em;
 }
 
 .roles-left { justify-self: start; }
 .roles-center { justify-self: center; }
 .roles-right { justify-self: end; }
-
 
 /* =========================
    GALLERY FIXED
@@ -217,4 +220,10 @@ hr {
 
 .section-title {
   margin: 18px 0 18px;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1400px;   /* or 1200px depending on your taste */
+  margin: 0 auto;
 }
