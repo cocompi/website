@@ -52,7 +52,6 @@ body {
 
 .caption a {
   color: rgba(0, 0, 0, 0.75);
-  text-decoration: underline;
 }
 
 .caption a:hover {
