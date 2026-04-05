@@ -59,23 +59,33 @@ document.querySelectorAll(".gallery").forEach(gallery => {
 
     // LAST ROW (not stretched)
     if (row.length) {
-      newHTML += `<div class="row">`;
 
-      row.forEach(r => {
-        const width = r.aspect * targetRowHeight;
+  const gapTotal = (row.length - 1) * 10;
 
-        newHTML += `
-          <div class="item" style="width:${width}px">
-  <div class="media" style="height:${targetRowHeight}px">
-    ${r.item.querySelector(".media").innerHTML}
-  </div>
-  ${r.item.querySelector(".caption").outerHTML}
-</div>
-        `;
-      });
+  // 🔴 KEY: justify if it's the only row OR enough items
+  const shouldJustify = true;
 
-      newHTML += `</div>`;
-    }
+  const finalHeight = shouldJustify
+    ? (containerWidth - gapTotal) / rowAspectSum
+    : targetRowHeight;
+
+  newHTML += `<div class="row">`;
+
+  row.forEach(r => {
+    const width = r.aspect * finalHeight;
+
+    newHTML += `
+      <div class="item" style="width:${width}px">
+        <div class="media" style="height:${finalHeight}px">
+          ${r.item.querySelector(".media").innerHTML}
+        </div>
+        ${r.item.querySelector(".caption").outerHTML}
+      </div>
+    `;
+  });
+
+  newHTML += `</div>`;
+}
 
     gallery.innerHTML = newHTML;
   }
