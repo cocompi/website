@@ -90,10 +90,24 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     gallery.innerHTML = newHTML;
   }
 
-  window.addEventListener("load", layout);
-  window.addEventListener("resize", () => {
-    clearTimeout(window._resizeTimer);
-    window._resizeTimer = setTimeout(layout, 100);
+  window.addEventListener("load", () => {
+  const images = gallery.querySelectorAll("img");
+
+  let loaded = 0;
+
+  images.forEach(img => {
+    if (img.complete) {
+      loaded++;
+    } else {
+      img.onload = () => {
+        loaded++;
+        if (loaded === images.length) layout();
+      };
+    }
+  });
+
+  if (loaded === images.length) layout();
+});
   });
 
 });
