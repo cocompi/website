@@ -165,28 +165,13 @@ hr {
 .roles {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  column-gap: 0rem;
-
   align-items: center;
-  min-height: 80px;
+  margin-bottom: 22px;
 }
 
-/* LEFT ALIGN */
-.roles-left {
-  text-align: left;
-}
-
-/* RIGHT ALIGN */
-.roles-right {
-  text-align: right;
-}
-
-/* CENTER */
-.roles-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.roles-left { justify-self: start; }
+.roles-center { justify-self: center; }
+.roles-right { justify-self: end; }
 
 
 /* =========================
