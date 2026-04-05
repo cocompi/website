@@ -90,6 +90,10 @@ h2 {
   margin: 18px 0 18px;
 }
 
+/* =========================
+   SHARED GRID STRUCTURE
+========================= */
+
 .nav,
 .roles {
   display: grid;
@@ -97,21 +101,33 @@ h2 {
   align-items: center;
 }
 
-.nav-left,
-.roles-left {
+/* =========================
+   NAV (edge aligned)
+========================= */
+
+.nav-left {
   justify-self: start;
-  text-align: center;
+  text-align: left;
 }
 
-.nav-center,
-.roles-center {
+.nav-center {
   justify-self: center;
   text-align: center;
 }
 
-.nav-right,
-.roles-right {
+.nav-right {
   justify-self: end;
+  text-align: right;
+}
+
+/* =========================
+   ROLES (column-centered)
+========================= */
+
+.roles-left,
+.roles-center,
+.roles-right {
+  justify-self: center;
   text-align: center;
 }
 
