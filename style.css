@@ -202,3 +202,7 @@ hr {
   width: 100%;
   word-wrap: break-word;
 }
+
+.section-title {
+  margin: 18px 0 8px;
+}
