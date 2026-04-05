@@ -10,7 +10,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     // 🔴 CRITICAL FIX: clamp height HARD
     const targetRowHeight = Math.min(
       window.innerHeight * rowHeightFactor,
-      260   // ← THIS fixes your issue
+      300   // ← THIS fixes your issue
     );
 
     let newHTML = "";
