@@ -90,53 +90,37 @@ h2 {
   margin: 18px 0 18px;
 }
 
-/* =========================
-   NAV
-========================= */
-
-.nav {
+.nav,
+.roles {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  column-gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  min-height: 80px;
 }
 
-/* LEFT + RIGHT */
 .nav-left,
-.nav-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  font-size: 12px;
-  line-height: 1.1;
+.roles-left {
+  justify-self: start;
 }
 
-/* LEFT ALIGN */
-.nav-left {
-  text-align: left;
+.nav-center,
+.roles-center {
+  justify-self: center;
+  text-align: center;
 }
 
-/* RIGHT ALIGN */
-.nav-right {
+.nav-right,
+.roles-right {
+  justify-self: end;
   text-align: right;
 }
 
-/* CENTER */
-.nav-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* LOGO */
 .nav-center h1 {
   font-family: "Inter", sans-serif;
   font-size: 42px;
   letter-spacing: 0.1em;
-
   filter: drop-shadow(-2px -2px 0 rgba(0,0,0,0.3));
+
+  transform: translateX(-0.05em); /* optical centering */
 }
 
 /* =========================
@@ -148,26 +132,6 @@ hr {
   border-top: 1px solid #d0d0d0;
   margin: 2px 0 8px;
 }
-
-/* =========================
-   ROLES
-========================= */
-
-.roles {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-
-  min-height: 40px;     /* 🔴 important */
-  margin-bottom: 22px;
-
-  font-size: 12px;
-  letter-spacing: 0.03em;
-}
-
-.roles-left { justify-self: start; }
-.roles-center { justify-self: center; }
-.roles-right { justify-self: end; }
 
 /* =========================
    GALLERY FIXED
