@@ -21,7 +21,7 @@ body {
 
 .bodycopy {
   font-family: "Inter", -apple-system, sans-serif;
-  font-size: 15px;   /* was 1.3rem */
+  font-size: 14px;   /* was 1.3rem */
   font-weight: 500;
   color: rgba(0, 0, 0, 0.75);
 
@@ -131,7 +131,7 @@ h2 {
 hr {
   border: none;
   border-top: 1px solid #d0d0d0;
-  margin: 2px 0 2px;
+  margin: 4px 0 4px;
 }
 
 /* =========================
