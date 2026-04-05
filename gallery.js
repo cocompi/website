@@ -7,20 +7,21 @@ document.querySelectorAll(".gallery").forEach(gallery => {
 
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
 
-    // 🔴 CRITICAL FIX: clamp height HARD
     const targetRowHeight = Math.min(
       window.innerHeight * rowHeightFactor,
-      300   // ← THIS fixes your issue
+      300
     );
 
     let newHTML = "";
     let row = [];
     let rowAspectSum = 0;
 
-    items.forEach((item, index) => {
+    const minItemsPerRow = Math.min(3, items.length);
+
+    items.forEach(item => {
       const img = item.querySelector("img");
 
-      if (!img.naturalWidth) return; // safety
+      if (!img.naturalWidth) return;
 
       const aspect = img.naturalWidth / img.naturalHeight;
 
@@ -30,11 +31,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       const gapTotal = (row.length - 1) * 10;
       const rowWidth = rowAspectSum * targetRowHeight + gapTotal;
 
-      // 🔴 CRITICAL FIX: require at least 2 items
-     const minItemsPerRow = 3;
-      if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
-
-if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
+      if (rowWidth >= containerWidth && row.length >= minItemsPerRow) {
 
         const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
@@ -44,12 +41,12 @@ if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
           const width = r.aspect * newHeight;
 
           newHTML += `
-           <div class="item" style="width:${width}px">
-             <div class="media" style="height:${newHeight}px">
-             ${r.item.querySelector(".media").innerHTML}
-             </div>
-             ${r.item.querySelector(".caption").outerHTML}
-           </div>
+            <div class="item" style="width:${width}px">
+              <div class="media" style="height:${newHeight}px">
+                ${r.item.querySelector(".media").innerHTML}
+              </div>
+              ${r.item.querySelector(".caption").outerHTML}
+            </div>
           `;
         });
 
@@ -60,55 +57,57 @@ if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
       }
     });
 
-    // LAST ROW (not stretched)
+    // LAST ROW (always justified)
     if (row.length) {
 
-  const gapTotal = (row.length - 1) * 10;
+      const gapTotal = (row.length - 1) * 10;
+      const finalHeight = (containerWidth - gapTotal) / rowAspectSum;
 
-  // 🔴 KEY: justify if it's the only row OR enough items
-  const shouldJustify = true;
+      newHTML += `<div class="row">`;
 
-  const finalHeight = shouldJustify
-    ? (containerWidth - gapTotal) / rowAspectSum
-    : targetRowHeight;
+      row.forEach(r => {
+        const width = r.aspect * finalHeight;
 
-  newHTML += `<div class="row">`;
+        newHTML += `
+          <div class="item" style="width:${width}px">
+            <div class="media" style="height:${finalHeight}px">
+              ${r.item.querySelector(".media").innerHTML}
+            </div>
+            ${r.item.querySelector(".caption").outerHTML}
+          </div>
+        `;
+      });
 
-  row.forEach(r => {
-    const width = r.aspect * finalHeight;
-
-    newHTML += `
-      <div class="item" style="width:${width}px">
-        <div class="media" style="height:${finalHeight}px">
-          ${r.item.querySelector(".media").innerHTML}
-        </div>
-        ${r.item.querySelector(".caption").outerHTML}
-      </div>
-    `;
-  });
-
-  newHTML += `</div>`;
-}
+      newHTML += `</div>`;
+    }
 
     gallery.innerHTML = newHTML;
   }
 
+  // WAIT FOR IMAGES
   window.addEventListener("load", () => {
-  const images = gallery.querySelectorAll("img");
+    const images = gallery.querySelectorAll("img");
 
-  let loaded = 0;
+    let loaded = 0;
 
-  images.forEach(img => {
-    if (img.complete) {
-      loaded++;
-    } else {
-      img.onload = () => {
+    images.forEach(img => {
+      if (img.complete) {
         loaded++;
-        if (loaded === images.length) layout();
-      };
-    }
+      } else {
+        img.onload = () => {
+          loaded++;
+          if (loaded === images.length) layout();
+        };
+      }
+    });
+
+    if (loaded === images.length) layout();
   });
 
-  if (loaded === images.length) layout();
-});
+  // RESIZE
+  window.addEventListener("resize", () => {
+    clearTimeout(window._resizeTimer);
+    window._resizeTimer = setTimeout(layout, 100);
   });
+
+});
