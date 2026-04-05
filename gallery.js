@@ -41,9 +41,12 @@ document.querySelectorAll(".gallery").forEach(gallery => {
           const width = r.aspect * newHeight;
 
           newHTML += `
-            <div class="item" style="width:${width}px;height:${newHeight}px">
-              ${r.item.innerHTML}
-            </div>
+           <div class="item" style="width:${width}px">
+             <div class="media" style="height:${newHeight}px">
+             ${r.item.querySelector(".media").innerHTML}
+             </div>
+             ${r.item.querySelector(".caption").outerHTML}
+           </div>
           `;
         });
 
@@ -62,9 +65,12 @@ document.querySelectorAll(".gallery").forEach(gallery => {
         const width = r.aspect * targetRowHeight;
 
         newHTML += `
-          <div class="item" style="width:${width}px;height:${targetRowHeight}px">
-            ${r.item.innerHTML}
-          </div>
+          <div class="item" style="width:${width}px">
+  <div class="media" style="height:${targetRowHeight}px">
+    ${r.item.querySelector(".media").innerHTML}
+  </div>
+  ${r.item.querySelector(".caption").outerHTML}
+</div>
         `;
       });
 
