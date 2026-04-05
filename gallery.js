@@ -3,10 +3,10 @@ document.querySelectorAll(".gallery").forEach(gallery => {
   const originalItems = Array.from(gallery.querySelectorAll(".item"));
 
   function layout() {
-    const containerWidth = gallery.clientWidth;
+
+    const containerWidth = Math.floor(gallery.getBoundingClientRect().width);
     const gap = 10;
 
-    // 🔴 KEY CHANGE: remove hard cap
     const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.18;
     const targetRowHeight = window.innerHeight * rowHeightFactor;
 
@@ -26,10 +26,10 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       const gapTotal = (row.length - 1) * gap;
       const estimatedWidth = rowAspectSum * targetRowHeight + gapTotal;
 
-      // ✅ Trigger row when it exceeds container
       if (estimatedWidth >= containerWidth) {
 
-        const newHeight = (containerWidth - gapTotal) / rowAspectSum;
+        const usableWidth = containerWidth - gapTotal;
+        const newHeight = usableWidth / rowAspectSum;
 
         newHTML += `<div class="row">`;
 
@@ -53,10 +53,12 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       }
     });
 
-    // ✅ LAST ROW — ALWAYS FULL WIDTH (critical fix)
+    // LAST ROW (force full width)
     if (row.length) {
+
       const gapTotal = (row.length - 1) * gap;
-      const newHeight = (containerWidth - gapTotal) / rowAspectSum;
+      const usableWidth = containerWidth - gapTotal;
+      const newHeight = usableWidth / rowAspectSum;
 
       newHTML += `<div class="row">`;
 
@@ -79,7 +81,6 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     gallery.innerHTML = newHTML;
   }
 
-  // ✅ WAIT FOR IMAGES
   function waitForImagesAndLayout() {
     const images = gallery.querySelectorAll("img");
     let loaded = 0;
@@ -100,7 +101,6 @@ document.querySelectorAll(".gallery").forEach(gallery => {
 
   window.addEventListener("load", waitForImagesAndLayout);
 
-  // ✅ RESIZE (important for first row bug)
   let resizeTimer;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
