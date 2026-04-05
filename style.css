@@ -165,7 +165,7 @@ hr {
 .roles {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  column-gap: 2rem;
+  column-gap: 0rem;
 
   align-items: center;
   min-height: 80px;
