@@ -1,38 +1,33 @@
 document.querySelectorAll(".gallery").forEach(gallery => {
 
-  // 🔴 STORE ORIGINAL ITEMS (REAL NODES, not HTML string)
-  const originalItems = Array.from(gallery.children).map(item => item.cloneNode(true));
+  const originalItems = Array.from(gallery.querySelectorAll(".item"));
 
   function layout() {
-
     const containerWidth = gallery.clientWidth;
-    const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.12;
+    const gap = 10;
 
-    const targetRowHeight = Math.min(
-      window.innerHeight * rowHeightFactor,
-      300
-    );
+    // 🔴 KEY CHANGE: remove hard cap
+    const rowHeightFactor = parseFloat(gallery.dataset.rowHeight) || 0.18;
+    const targetRowHeight = window.innerHeight * rowHeightFactor;
 
     let newHTML = "";
     let row = [];
     let rowAspectSum = 0;
 
-    // 🔴 adaptive (Cargo-like): no fixed min items
     originalItems.forEach(item => {
       const img = item.querySelector("img");
-
-      if (!img || !img.naturalWidth) return;
+      if (!img.naturalWidth) return;
 
       const aspect = img.naturalWidth / img.naturalHeight;
 
       row.push({ item, aspect });
       rowAspectSum += aspect;
 
-      const gapTotal = (row.length - 1) * 10;
-      const rowWidth = rowAspectSum * targetRowHeight + gapTotal;
+      const gapTotal = (row.length - 1) * gap;
+      const estimatedWidth = rowAspectSum * targetRowHeight + gapTotal;
 
-      // 🔴 KEY: no minItemsPerRow restriction
-      if (rowWidth >= containerWidth) {
+      // ✅ Trigger row when it exceeds container
+      if (estimatedWidth >= containerWidth) {
 
         const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
@@ -58,19 +53,19 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       }
     });
 
-    // 🔴 LAST ROW (DO NOT FORCE JUSTIFY → more Cargo-like)
+    // ✅ LAST ROW — ALWAYS FULL WIDTH (critical fix)
     if (row.length) {
-
-      const gapTotal = (row.length - 1) * 10;
+      const gapTotal = (row.length - 1) * gap;
+      const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
       newHTML += `<div class="row">`;
 
       row.forEach(r => {
-        const width = r.aspect * targetRowHeight;
+        const width = r.aspect * newHeight;
 
         newHTML += `
           <div class="item" style="width:${width}px">
-            <div class="media" style="height:${targetRowHeight}px">
+            <div class="media" style="height:${newHeight}px">
               ${r.item.querySelector(".media").innerHTML}
             </div>
             ${r.item.querySelector(".caption").outerHTML}
@@ -84,45 +79,32 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     gallery.innerHTML = newHTML;
   }
 
-  // 🔴 WAIT FOR IMAGES (robust + simple)
-  function waitForImages(callback) {
+  // ✅ WAIT FOR IMAGES
+  function waitForImagesAndLayout() {
     const images = gallery.querySelectorAll("img");
     let loaded = 0;
-
-    if (!images.length) {
-      callback();
-      return;
-    }
 
     images.forEach(img => {
       if (img.complete) {
         loaded++;
-        if (loaded === images.length) callback();
       } else {
-        img.onload = img.onerror = () => {
+        img.onload = () => {
           loaded++;
-          if (loaded === images.length) callback();
+          if (loaded === images.length) layout();
         };
       }
     });
+
+    if (loaded === images.length) layout();
   }
 
-  // 🔴 INITIAL LOAD (delayed → fixes first-row bug)
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      waitForImages(layout);
-    }, 60);
-  });
+  window.addEventListener("load", waitForImagesAndLayout);
 
-  // 🔴 RESIZE (THIS is what you were missing)
-  let resizeTimeout;
-
+  // ✅ RESIZE (important for first row bug)
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-
-    resizeTimeout = setTimeout(() => {
-      layout();
-    }, 120);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layout, 120);
   });
 
 });
