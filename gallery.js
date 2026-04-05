@@ -31,7 +31,10 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       const rowWidth = rowAspectSum * targetRowHeight + gapTotal;
 
       // 🔴 CRITICAL FIX: require at least 2 items
-      if (rowWidth >= containerWidth && row.length > 1) {
+     const minItemsPerRow = 3;
+      if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
+
+if (rowWidth >= containerWidth && row.length >= minItemsPerRow)
 
         const newHeight = (containerWidth - gapTotal) / rowAspectSum;
 
@@ -109,5 +112,3 @@ document.querySelectorAll(".gallery").forEach(gallery => {
   if (loaded === images.length) layout();
 });
   });
-
-});
