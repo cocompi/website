@@ -131,6 +131,11 @@ h2 {
   text-align: center;
 }
 
+.roles {
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+
 .nav-center h1 {
   font-family: "Inter", sans-serif;
   font-size: 42px;
