@@ -175,3 +175,17 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
   });
 
 })();
+
+/* redirect from root based on saved language */
+
+(function () {
+  if (window.location.pathname === "/") {
+    const saved = localStorage.getItem("lang");
+
+    if (saved === "es") {
+      window.location.href = "/sobre";
+    } else {
+      window.location.href = "/about";
+    }
+  }
+})();
