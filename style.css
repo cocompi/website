@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Martian Mono Custom";
   src: url("fonts/martian-mono-1.1.0-woff2/MartianMono-StdRg.woff2") format("woff2");
-  font-weight: 100 800; /* supports variable if your file is variable */
+  font-weight: 100 700; /* supports variable if your file is variable */
   font-style: normal;
   font-display: swap;
 }
@@ -146,7 +146,7 @@ h2 {
 
 .nav-center h1 {
   font-family: "Martian Mono Custom", monospace;
-  font-size: 42px;
+  font-size: 40px;
 
   font-variation-settings: "wght" 400;
 
