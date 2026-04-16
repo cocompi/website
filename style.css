@@ -278,6 +278,35 @@ hr {
 }
 
 /* =========================
+   SLIDESHOW
+========================= */
+
+.about-slideshow {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* adjust if needed */
+  overflow: hidden;
+}
+
+/* slides stacked */
+.about-slideshow .slide {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+/* visible slide */
+.about-slideshow .slide.active {
+  opacity: 1;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
