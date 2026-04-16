@@ -216,3 +216,78 @@ hr {
   max-width: 1400px;   /* or 1200px depending on your taste */
   margin: 0 auto;
 }
+
+/* =========================
+   ABOUT LAYOUT
+========================= */
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 20px;
+}
+
+/* LEFT COLUMN */
+.about-left {
+  width: 100%;
+}
+
+/* simple vertical gallery */
+.about-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* RIGHT COLUMN */
+.about-right {
+  max-width: 600px;
+}
+
+/* TEXT SPACING */
+.about-right p {
+  margin-bottom: 12px;
+}
+
+/* =========================
+   LINKS (buttons row)
+========================= */
+
+.about-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* button style */
+.about-links a {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #000;
+  text-decoration: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-links {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
