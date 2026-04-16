@@ -1,3 +1,7 @@
+/* =========================
+   GALLERY SYSTEM (UNCHANGED)
+========================= */
+
 document.querySelectorAll(".gallery").forEach(gallery => {
 
   const originalItems = Array.from(gallery.querySelectorAll(".item"));
@@ -34,7 +38,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
         newHTML += `<div class="row">`;
 
         row.forEach(r => {
-          const width = r.aspect * newHeight;
+          const width = Math.ceil(r.aspect * newHeight);
 
           newHTML += `
             <div class="item" style="width:${width}px">
@@ -53,7 +57,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       }
     });
 
-    // LAST ROW (force full width)
+    // LAST ROW (fill width)
     if (row.length) {
 
       const gapTotal = (row.length - 1) * gap;
@@ -63,7 +67,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       newHTML += `<div class="row">`;
 
       row.forEach(r => {
-        const width = r.aspect * newHeight;
+        const width = Math.ceil(r.aspect * newHeight);
 
         newHTML += `
           <div class="item" style="width:${width}px">
@@ -106,5 +110,42 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(layout, 120);
   });
+
+});
+
+
+/* =========================
+   ABOUT SLIDESHOW (NEW)
+========================= */
+
+document.querySelectorAll(".about-slideshow").forEach(slideshow => {
+
+  const slides = slideshow.querySelectorAll(".slide");
+  let index = 0;
+  let interval;
+
+  function showNextSlide() {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }
+
+  function start() {
+    interval = setInterval(showNextSlide, 6000);
+  }
+
+  function stop() {
+    clearInterval(interval);
+  }
+
+  // start autoplay
+  start();
+
+  // pause on hover
+  slideshow.addEventListener("mouseenter", stop);
+  slideshow.addEventListener("mouseleave", start);
+
+  // click to advance
+  slideshow.addEventListener("click", showNextSlide);
 
 });
