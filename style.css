@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Martian Mono Custom";
-  src: url("fonts/martian-mono-1.1.0-woff2/MartianMono-NrLt.woff2") format("woff2");
+  src: url("fonts/martian-mono-1.1.0-woff2/MartianMono-StdRg.woff2") format("woff2");
   font-weight: 100 800; /* supports variable if your file is variable */
   font-style: normal;
   font-display: swap;
