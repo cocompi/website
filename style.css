@@ -320,3 +320,34 @@ hr {
     gap: 10px;
   }
 }
+
+/* =========================
+   NAV LINK SPLIT (About / Sobre)
+========================= */
+
+.nav-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* controls spacing */
+}
+
+.nav-separator {
+  opacity: 0.6;
+}
+
+/* =========================
+   LANGUAGE SYSTEM
+========================= */
+
+.nav-links a {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a.active {
+  opacity: 1;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
