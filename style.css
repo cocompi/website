@@ -4,7 +4,9 @@
   font-weight: 100 800; /* supports variable if your file is variable */
   font-style: normal;
   font-display: swap;
-}/* RESET */
+}
+
+/* RESET */
 * {
   margin: 0;
   padding: 0;
