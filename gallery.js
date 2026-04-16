@@ -149,3 +149,29 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
   slideshow.addEventListener("click", showNextSlide);
 
 });
+
+/* =========================
+   LANGUAGE SYSTEM
+========================= */
+
+(function () {
+
+  const path = window.location.pathname;
+
+  // detect language from URL
+  let lang = "en";
+  if (path.startsWith("/sobre")) lang = "es";
+
+  // store preference
+  localStorage.setItem("lang", lang);
+
+  // highlight active link
+  document.querySelectorAll("[data-lang]").forEach(link => {
+    if (link.dataset.lang === lang) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+
+})();
