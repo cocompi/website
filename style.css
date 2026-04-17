@@ -131,9 +131,10 @@ h2 {
 }
 
 .nav-right {
+  display: flex;
+  flex-direction: column;
   justify-self: end;
   justify-content: center;
-  flex-direction: column;
   text-align: right;
 }
 
