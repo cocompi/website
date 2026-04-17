@@ -43,7 +43,7 @@ document.querySelectorAll(".gallery").forEach(gallery => {
           newHTML += `
             <div class="item" style="width:${width}px">
               <div class="media" style="height:${newHeight}px">
-                ${r.item.querySelector(".media").innerHTML}
+                ${r.item.querySelector(".media").outerHTML}
               </div>
               ${r.item.querySelector(".caption").outerHTML}
             </div>
