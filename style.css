@@ -340,7 +340,7 @@ hr {
 .nav-links {
   display: inline-flex;
   align-items: center;
-  gap: 10px; /* controls spacing */
+  gap: 14px; /* controls spacing */
 }
 
 .nav-separator {
