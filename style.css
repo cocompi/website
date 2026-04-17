@@ -365,3 +365,45 @@ hr {
 .nav-links a:hover {
   opacity: 1;
 }
+
+/* =========================
+   WORK PAGE
+========================= */
+
+.work {
+  margin-top: 20px;
+}
+
+/* FIRST ROW */
+.work-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* LEFT */
+.work-left {
+  width: 100%;
+}
+
+/* RIGHT */
+.work-right {
+  max-width: 600px;
+}
+
+.work-right p {
+  margin-bottom: 12px;
+}
+
+/* SECOND ROW */
+.work-meta {
+  margin-top: 30px;
+  max-width: 600px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .work-main {
+    grid-template-columns: 1fr;
+  }
+}
