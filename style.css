@@ -295,7 +295,7 @@ hr {
 .about-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 40px;
+  margin-top: 10px;
   text-align: center;
 }
 
