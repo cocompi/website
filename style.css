@@ -317,7 +317,6 @@ hr {
   width: 100%;
   aspect-ratio: 16 / 9; /* adjust if needed */
   overflow: hidden;
-  background: #f5f5f5; /* same as gallery */
 }
 
 /* slides stacked */
