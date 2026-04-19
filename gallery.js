@@ -38,22 +38,32 @@ document.querySelectorAll(".gallery").forEach(gallery => {
         newHTML += `<div class="row">`;
 
         row.forEach(r => {
-          const width = Math.ceil(r.aspect * newHeight);
+  const width = Math.ceil(r.aspect * newHeight);
 
-          newHTML += `
-            const isLink = r.item.tagName === "A";
-const tag = isLink ? "a" : "div";
-const href = isLink ? `href="${r.item.getAttribute("href")}"` : "";
+  const link = r.item.querySelector("a");
+  const href = link ? link.getAttribute("href") : null;
 
-newHTML += `
-  <${tag} class="item" ${href} style="width:${width}px">
+  const content = `
     <div class="media" style="height:${newHeight}px">
       ${r.item.querySelector(".media").innerHTML}
     </div>
     ${r.item.querySelector(".caption").outerHTML}
-  </${tag}>
-`;
-        });
+  `;
+
+  if (href) {
+    newHTML += `
+      <a href="${href}" class="item" style="width:${width}px">
+        ${content}
+      </a>
+    `;
+  } else {
+    newHTML += `
+      <div class="item" style="width:${width}px">
+        ${content}
+      </div>
+    `;
+  }
+});
 
         newHTML += `</div>`;
 
@@ -72,22 +82,32 @@ newHTML += `
       newHTML += `<div class="row">`;
 
       row.forEach(r => {
-        const width = Math.ceil(r.aspect * newHeight);
+  const width = Math.ceil(r.aspect * newHeight);
 
-        newHTML += `
-          const isLink = r.item.tagName === "A";
-const tag = isLink ? "a" : "div";
-const href = isLink ? `href="${r.item.getAttribute("href")}"` : "";
+  const link = r.item.querySelector("a");
+  const href = link ? link.getAttribute("href") : null;
 
-newHTML += `
-  <${tag} class="item" ${href} style="width:${width}px">
+  const content = `
     <div class="media" style="height:${newHeight}px">
       ${r.item.querySelector(".media").innerHTML}
     </div>
     ${r.item.querySelector(".caption").outerHTML}
-  </${tag}>
-`;
-      });
+  `;
+
+  if (href) {
+    newHTML += `
+      <a href="${href}" class="item" style="width:${width}px">
+        ${content}
+      </a>
+    `;
+  } else {
+    newHTML += `
+      <div class="item" style="width:${width}px">
+        ${content}
+      </div>
+    `;
+  }
+});
 
       newHTML += `</div>`;
     }
