@@ -188,20 +188,19 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 
   const path = window.location.pathname;
 
-  // detect language from URL
   let lang = "en";
-  if (path.startsWith("/sobre")) lang = "es";
 
-  // store preference
+  if (
+    path.startsWith("/sobre") ||
+    path.includes("-es")
+  ) {
+    lang = "es";
+  }
+
   localStorage.setItem("lang", lang);
 
-  // highlight active link
   document.querySelectorAll("[data-lang]").forEach(link => {
-    if (link.dataset.lang === lang) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
-    }
+    link.classList.toggle("active", link.dataset.lang === lang);
   });
 
 })();
