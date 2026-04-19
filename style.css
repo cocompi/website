@@ -410,12 +410,12 @@ hr {
 }
 
 .work-right p {
-  margin-bottom: 12px;
+  margin-bottom: 0px;
 }
 
 /* SECOND ROW */
 .work-meta {
-  margin-top: 10px;
+  margin-top: 4px;
   max-width: 600px;
 }
 
