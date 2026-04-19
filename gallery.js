@@ -41,13 +41,18 @@ document.querySelectorAll(".gallery").forEach(gallery => {
           const width = Math.ceil(r.aspect * newHeight);
 
           newHTML += `
-            <div class="item" style="width:${width}px">
-              <div class="media" style="height:${newHeight}px">
-                ${r.item.querySelector(".media").outerHTML}
-              </div>
-              ${r.item.querySelector(".caption").outerHTML}
-            </div>
-          `;
+            const isLink = r.item.tagName === "A";
+const tag = isLink ? "a" : "div";
+const href = isLink ? `href="${r.item.getAttribute("href")}"` : "";
+
+newHTML += `
+  <${tag} class="item" ${href} style="width:${width}px">
+    <div class="media" style="height:${newHeight}px">
+      ${r.item.querySelector(".media").innerHTML}
+    </div>
+    ${r.item.querySelector(".caption").outerHTML}
+  </${tag}>
+`;
         });
 
         newHTML += `</div>`;
@@ -70,13 +75,18 @@ document.querySelectorAll(".gallery").forEach(gallery => {
         const width = Math.ceil(r.aspect * newHeight);
 
         newHTML += `
-          <div class="item" style="width:${width}px">
-            <div class="media" style="height:${newHeight}px">
-              ${r.item.querySelector(".media").outerHTML}
-            </div>
-            ${r.item.querySelector(".caption").outerHTML}
-          </div>
-        `;
+          const isLink = r.item.tagName === "A";
+const tag = isLink ? "a" : "div";
+const href = isLink ? `href="${r.item.getAttribute("href")}"` : "";
+
+newHTML += `
+  <${tag} class="item" ${href} style="width:${width}px">
+    <div class="media" style="height:${newHeight}px">
+      ${r.item.querySelector(".media").innerHTML}
+    </div>
+    ${r.item.querySelector(".caption").outerHTML}
+  </${tag}>
+`;
       });
 
       newHTML += `</div>`;
