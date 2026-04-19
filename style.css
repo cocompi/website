@@ -209,6 +209,13 @@ hr {
 
 .item {
   flex: 0 0 auto;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.item:hover {
+  opacity: 0.9;
 }
 
 /* IMAGE CONTAINER (controlled by JS) */
