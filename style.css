@@ -441,7 +441,7 @@ hr {
 }
 
 .work-year {
-  margin-top: 4px;   /* 🔴 controls the gap */
+  margin-top: 2px;   /* 🔴 controls the gap */
   margin-bottom: 12px; /* optional: space before next content */
 }
 
