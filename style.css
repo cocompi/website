@@ -416,12 +416,37 @@ hr {
 /* SECOND ROW */
 .work-meta {
   margin-top: 12px;
-  max-width: 600px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 🔴 two equal columns */
+  gap: 2rem;
+
+  width: 100%;        /* 🔴 allow full width */
+  max-width: none;    /* 🔴 remove 600px constraint */
+}
+
+.work-meta-left {
+  max-width: 600px; /* keeps your text readable */
+}
+
+.work-meta-right {
+  width: 100%;
+}
+
+.work-meta-right iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
 }
 
 /* MOBILE */
 @media (max-width: 900px) {
   .work-main {
     grid-template-columns: 1fr;
+  }
+
+  .work-meta {
+    grid-template-columns: 1fr; /* 🔴 stack on mobile */
   }
 }
