@@ -455,6 +455,11 @@ hr {
 	margin-bottom: 10px;
 }
 
+.work-synopsis {
+    margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
   .work-main {
