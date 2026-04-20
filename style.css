@@ -440,6 +440,11 @@ hr {
   border: none;
 }
 
+.work-year {
+  margin-top: 4px;   /* 🔴 controls the gap */
+  margin-bottom: 12px; /* optional: space before next content */
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
   .work-main {
