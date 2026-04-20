@@ -445,6 +445,15 @@ hr {
   margin-bottom: 12px; /* optional: space before next content */
 }
 
+.work-details {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.work-credits {
+  margin-bottom: 10px;
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
   .work-main {
