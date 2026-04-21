@@ -440,27 +440,46 @@ hr {
   border: none;
 }
 
-.work-year {
-  margin-top: 2px;   /* 🔴 controls the gap */
-  margin-bottom: 12px; /* optional: space before next content */
+/* =========================
+   WORK HEADER SYSTEM
+========================= */
+
+.work-header {
+  display: flex;
+  flex-direction: column;
 }
 
-.work-details {
-  margin-top: 10px;
+/* TITLE */
+.work-title {
+  margin: 0;
+}
+
+/* YEAR */
+.work-year {
+  margin-top: 4px;
   margin-bottom: 10px;
 }
 
+/* DETAILS LIST */
+.work-details {
+  margin: 0 0 10px 0;
+  padding-left: 1.2em;
+}
+
+/* CREDITS */
 .work-credits {
-    margin-top: 10px;
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.work-synopsis {
-    margin-top: 10px;
-	margin-bottom: 10px;
+/* DESCRIPTION */
+.work-description {
+  margin-top: 4px;
 }
 
-/* MOBILE */
+/* =========================
+  MOBILE
+========================= */
+
 @media (max-width: 900px) {
   .work-main {
     grid-template-columns: 1fr;
