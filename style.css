@@ -339,6 +339,37 @@ hr {
 }
 
 /* =========================
+   ABOUT / SOBRE – HEIGHT-LIMITED SLIDESHOW
+========================= */
+
+.about-limit-height {
+  display: flex;
+  align-items: center;       /* vertical centering */
+  justify-content: center;   /* horizontal centering */
+
+  height: 36rem;             /* 🔴 fixed max height */
+  width: 100%;
+
+  overflow: hidden;
+}
+
+/* images behave like Cargo "limit by height" */
+.about-limit-height .slide {
+  max-height: 100%;          /* 🔴 never exceed container height */
+  max-width: 100%;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* remove absolute stacking ONLY for about pages */
+.about-limit-height .slide {
+  position: static;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
