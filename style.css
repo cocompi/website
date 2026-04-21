@@ -465,10 +465,12 @@ hr {
 .work-details {
   margin: 0 0 10px 0;
   padding-left: 1.2em;
+  margin-top: 10px;
 }
 
 /* CREDITS */
 .work-credits {
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -478,7 +480,7 @@ hr {
 
 /* DESCRIPTION */
 .work-description {
-  margin-top: 4px;
+  margin-top: 10px;
 }
 
 /* =========================
