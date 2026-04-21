@@ -145,8 +145,6 @@ function waitForImagesAndLayout() {
       img.onload = () => layout(); // 🔴 relayout per image
     }
   });
-
-//end of change
    
   // 🔴 fallback (runs instantly)
   layout();
