@@ -347,7 +347,7 @@ hr {
   align-items: center;       /* vertical centering */
   justify-content: center;   /* horizontal centering */
 
-  height: 36rem;            /* 🔴 fixed max height */
+  height: 36.1rem;            /* 🔴 fixed max height */
   width: 100%;
 
   overflow: hidden;
