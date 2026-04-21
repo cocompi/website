@@ -199,6 +199,23 @@ hr {
   width: 100%;
 }
 
+/* =========================
+   TEMP GALLERY
+========================= */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery .item {
+  width: calc(33.333% - 10px); /* temporary grid */
+}
+
+/* =========================
+   END OF TEMP GALLERY
+========================= */
+
 .row {
   display: flex;
   gap: 10px;
