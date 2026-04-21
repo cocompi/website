@@ -115,24 +115,45 @@ document.querySelectorAll(".gallery").forEach(gallery => {
     gallery.innerHTML = newHTML;
   }
 
-  function waitForImagesAndLayout() {
-    const images = gallery.querySelectorAll("img");
-    let loaded = 0;
+//start of change
+   
+  //function waitForImagesAndLayout() {
+   // const images = gallery.querySelectorAll("img");
+   // let loaded = 0;
 
-    images.forEach(img => {
-      if (img.complete) {
-        loaded++;
-      } else {
-        img.onload = () => {
-          loaded++;
-          if (loaded === images.length) layout();
-        };
-      }
-    });
+   // images.forEach(img => {
+   //   if (img.complete) {
+   //     loaded++;
+   //   } else {
+   //     img.onload = () => {
+   //       loaded++;
+   //       if (loaded === images.length) layout();
+   //     };
+   //   }
+   // });
 
-    if (loaded === images.length) layout();
-  }
+    //if (loaded === images.length) layout();
+  //}
 
+function waitForImagesAndLayout() {
+  const images = gallery.querySelectorAll("img");
+
+  images.forEach(img => {
+    if (img.complete) {
+      layout(); // 🔴 layout immediately
+    } else {
+      img.onload = () => layout(); // 🔴 relayout per image
+    }
+  });
+
+//end of change
+   
+  // 🔴 fallback (runs instantly)
+  layout();
+}
+   
+//end of change
+   
   window.addEventListener("load", waitForImagesAndLayout);
 
   let resizeTimer;
