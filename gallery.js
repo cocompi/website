@@ -30,7 +30,9 @@ document.querySelectorAll(".gallery").forEach(gallery => {
       const gapTotal = (row.length - 1) * gap;
       const estimatedWidth = rowAspectSum * targetRowHeight + gapTotal;
 
-      if (estimatedWidth >= containerWidth) {
+      const forceBreak = item.classList.contains("break");
+
+      if (estimatedWidth >= containerWidth || forceBreak) {
 
         const usableWidth = containerWidth - gapTotal;
         const newHeight = usableWidth / rowAspectSum;
