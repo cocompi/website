@@ -329,7 +329,7 @@ hr {
    Individual button
 ========================= */
 
-.button {
+.button1 {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   margin-top: 20px;
@@ -337,7 +337,7 @@ hr {
 }
 
 /* button style */
-.button a {
+.button1 a {
   display: inline-block;
   padding: 10px 16px;
   border: 1px solid #000;
