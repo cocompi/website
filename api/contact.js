@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     service: "gmail",
     auth: {
       user: "cocompi.coco@gmail.com",
-      pass: process.env.tcsr_edzq_kupi_cwei"  // 🔴 use app password
+      pass: process.env."tcsr_edzq_kupi_cwei"  // 🔴 use app password
     }
   });
 
