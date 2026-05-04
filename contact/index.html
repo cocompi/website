@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – cocompi</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="page">
+  <div class="page-content bodycopy">
+
+    <!-- HEADER (same as other pages) -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="nav-links">
+          <a href="/about">About</a>
+          <span class="nav-separator">–</span>
+          <a href="/sobre">Sobre</a>
+        </div>
+        <div class="nav-links">
+          <a href="/">Works</a>
+          <span class="nav-separator">–</span>
+          <a href="/">Obras</a>
+        </div>
+      </div>
+
+      <div class="nav-center">
+        <h1><a href="/">COCOMPI</a></h1>
+      </div>
+
+      <div class="nav-right">
+        <a href="https://www.instagram.com/co.compi" target="_blank">Instagram</a>
+        <a href="/contact">Contact(o)</a>
+      </div>
+    </header>
+
+    <hr>
+
+    <!-- CONTACT FORM -->
+    <section class="contact">
+
+      <form id="contact-form">
+
+        <input type="text" name="name" placeholder="Name" required>
+
+        <input type="email" name="email" placeholder="Email" required>
+
+        <textarea name="message" placeholder="Message" rows="6" required></textarea>
+
+        <button type="submit">Send</button>
+
+        <p id="form-status"></p>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form));
+
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const status = document.getElementById("form-status");
+
+  if (res.ok) {
+    status.textContent = "Message sent.";
+    form.reset();
+  } else {
+    status.textContent = "Error sending message.";
+  }
+});
+</script>
+
+</body>
+</html>
