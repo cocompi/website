@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     service: "gmail",
     auth: {
       user: "cocompi.coco@gmail.com",
-      pass: process.env.EMAIL_PASS  // 🔴 use app password
+      pass: process.env.EMAIL_PASS="tcsr edzq kupi cwei"  // 🔴 use app password
     }
   });
 
