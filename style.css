@@ -429,6 +429,18 @@ hr {
   opacity: 1;
 }
 
+.work-lang-switch {
+  margin-bottom: 8px;
+}
+
+.work-lang-switch a {
+  opacity: 0.5;
+}
+
+.work-lang-switch a.active {
+  opacity: 1;
+}
+
 /* =========================
    WORK PAGE
 ========================= */
