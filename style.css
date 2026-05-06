@@ -546,7 +546,7 @@ hr {
 
 .lang-toggle {
   position: fixed;
-  top: 16px;
+  top: 56px; /* ↓ push below nav */
   right: 20px;
 
   font-family: "IBM Plex Mono", monospace;
@@ -555,7 +555,7 @@ hr {
   display: flex;
   gap: 6px;
 
-  z-index: 999; /* ensure clickable above everything */
+  z-index: 999;
 }
 
 .lang-toggle a {
