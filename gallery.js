@@ -210,46 +210,42 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
   const path = window.location.pathname;
 
   // detect language
-  let lang = (path.startsWith("/es") || path.startsWith("/sobre")) ? "es" : "en";
-
-  localStorage.setItem("lang", lang);
-
-  function getTranslatedPath(targetLang) {
-
-    let newPath = path;
-
-    // --- ABOUT ---
-    if (path === "/about" || path === "/sobre") {
-      return targetLang === "es" ? "/sobre" : "/about";
-    }
-
-    // --- HOME ---
-    if (path === "/" || path === "/es/" || path === "/es") {
-      return targetLang === "es" ? "/es/" : "/";
-    }
-
-    // --- WORK PAGES ---
-    if (path.startsWith("/es/")) {
-      // ES → EN
-      return path.replace("/es/", "/");
-    } else {
-      // EN → ES
-      return "/es" + path;
-    }
+  let lang = "en";
+  if (path.startsWith("/es") || path.startsWith("/sobre")) {
+    lang = "es";
   }
 
-  // apply toggle behavior
-  document.querySelectorAll(".lang-toggle a").forEach(link => {
+  // store
+  localStorage.setItem("lang", lang);
 
-    const targetLang = link.dataset.lang;
+  // highlight toggle
+  document.querySelectorAll("[data-set-lang]").forEach(link => {
+    if (link.dataset.setLang === lang) {
+      link.classList.add("active");
+    }
+  });
 
-    link.classList.toggle("active", targetLang === lang);
+  // handle click
+  document.querySelectorAll("[data-set-lang]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
 
-    link.addEventListener("click", () => {
-      const newPath = getTranslatedPath(targetLang);
+      const targetLang = link.dataset.setLang;
+
+      let newPath = window.location.pathname;
+
+      if (targetLang === "es") {
+        if (!newPath.startsWith("/es")) {
+          newPath = "/es" + (newPath === "/" ? "" : newPath);
+        }
+      } else {
+        if (newPath.startsWith("/es")) {
+          newPath = newPath.replace("/es", "") || "/";
+        }
+      }
+
       window.location.href = newPath;
     });
-
   });
 
 })();
