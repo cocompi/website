@@ -153,12 +153,18 @@ h2 {
   text-align: right;
 }
 
-/* each row behaves like a line */
-.nav-row {
+.nav-right {
   display: flex;
-  justify-content: flex-end;
-  align-items: baseline; /* 🔴 KEY: baseline alignment */
-  gap: 28px;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+/* group contact + toggle on same row */
+.nav-right-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* =========================
