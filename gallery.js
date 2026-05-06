@@ -208,51 +208,23 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 });
 
 /* =========================
-   GLOBAL LANGUAGE SYSTEM
+   LANGUAGE SYSTEM (FIXED)
 ========================= */
 
 (function () {
 
   const path = window.location.pathname;
 
-  // detect language
-  let lang = path.startsWith("/es") || path.startsWith("/sobre")
-    ? "es"
-    : "en";
+  let lang = "en";
+  if (path.startsWith("/es") || path.startsWith("/sobre")) {
+    lang = "es";
+  }
 
   localStorage.setItem("lang", lang);
 
-  // --- PAGE MAPPING ---
-  function getTranslatedPath(targetLang) {
-
-    let newPath = path;
-
-    if (targetLang === "es") {
-
-      // EN → ES
-      if (path === "/") newPath = "/es/";
-      else if (path === "/about") newPath = "/sobre";
-      else if (path.startsWith("/feedback")) newPath = "/es/feedback";
-
-    } else {
-
-      // ES → EN
-      if (path === "/es/" || path === "/es") newPath = "/";
-      else if (path === "/sobre") newPath = "/about";
-      else if (path.startsWith("/es/feedback")) newPath = "/feedback";
-
-    }
-
-    return newPath;
-  }
-
-  // --- APPLY LINKS ---
+  // highlight active language
   document.querySelectorAll("[data-lang]").forEach(link => {
-
-    const targetLang = link.dataset.lang;
-
-    // active state
-    if (targetLang === lang) {
+    if (link.dataset.lang === lang) {
       link.classList.add("active");
     } else {
       link.classList.remove("active");
