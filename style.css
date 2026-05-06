@@ -623,8 +623,20 @@ hr {
      WORK PAGE
   ========================= */
 
+ /* Reduce space above work section */
+  .work {
+    margin-top: 10px; /* was 20px */
+  }
+
+  /* Tighten first row spacing */
   .work-main {
+    gap: 1.2rem; /* was 2rem */
     grid-template-columns: 1fr;
+  }
+
+  /* Reduce space above title specifically */
+  .work-right h2 {
+    margin-top: 0;
   }
 
   .work-meta {
