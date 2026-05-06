@@ -180,16 +180,16 @@ h2 {
 }
 
 .lang-toggle a {
+  opacity: 0.5;
   text-decoration: none;
-  color: rgba(0,0,0,0.5);
 }
 
 .lang-toggle a.active {
-  color: rgba(0,0,0,1);
+  opacity: 1;
 }
 
 .lang-toggle a:hover {
-  color: rgba(0,0,0,1);
+  opacity: 1;
 }
 /* =========================
    ROLES (column-centered)
