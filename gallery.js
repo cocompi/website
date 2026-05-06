@@ -218,20 +218,22 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
   // store
   localStorage.setItem("lang", lang);
 
-  // highlight toggle
+  // ✅ highlight GLOBAL toggle
   document.querySelectorAll("[data-set-lang]").forEach(link => {
-    if (link.dataset.setLang === lang) {
-      link.classList.add("active");
-    }
+    link.classList.toggle("active", link.dataset.setLang === lang);
   });
 
-  // handle click
+  // ✅ highlight NAV links (THIS WAS MISSING)
+  document.querySelectorAll("[data-lang]").forEach(link => {
+    link.classList.toggle("active", link.dataset.lang === lang);
+  });
+
+  // handle click (toggle)
   document.querySelectorAll("[data-set-lang]").forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
 
       const targetLang = link.dataset.setLang;
-
       let newPath = window.location.pathname;
 
       if (targetLang === "es") {
