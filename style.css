@@ -141,15 +141,50 @@ h2 {
   align-items: center; /* 🔴 vertical centering */
 }
 
+/* =========================
+   NAV RIGHT (aligned rows)
+========================= */
+
 .nav-right {
   display: flex;
   flex-direction: column;
   gap: 12px;
   justify-self: end;
-  justify-content: flex-start;
   text-align: right;
 }
 
+/* each row behaves like a line */
+.nav-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline; /* 🔴 KEY: baseline alignment */
+  gap: 14px;
+}
+
+/* =========================
+   LANGUAGE TOGGLE (inline now)
+========================= */
+
+.lang-toggle {
+  display: inline-flex;
+  gap: 6px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+.lang-toggle a {
+  text-decoration: none;
+  color: rgba(0,0,0,0.5);
+}
+
+.lang-toggle a.active {
+  color: rgba(0,0,0,1);
+}
+
+.lang-toggle a:hover {
+  color: rgba(0,0,0,1);
+}
 /* =========================
    ROLES (column-centered)
 ========================= */
@@ -540,34 +575,3 @@ hr {
   }
 }
 
-/* =========================
-   GLOBAL LANGUAGE TOGGLE
-========================= */
-
-.lang-toggle {
-  position: fixed;
-  top: 56px; /* ↓ push below nav */
-  right: 20px;
-
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 12px;
-
-  display: flex;
-  gap: 6px;
-
-  z-index: 999;
-}
-
-.lang-toggle a {
-  text-decoration: none;
-  color: rgba(0,0,0,0.5);
-  cursor: pointer;
-}
-
-.lang-toggle a.active {
-  color: rgba(0,0,0,1);
-}
-
-.lang-toggle a:hover {
-  color: rgba(0,0,0,1);
-}
