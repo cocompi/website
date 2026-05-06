@@ -158,7 +158,7 @@ h2 {
   display: flex;
   justify-content: flex-end;
   align-items: baseline; /* 🔴 KEY: baseline alignment */
-  gap: 14px;
+  gap: 22px;
 }
 
 /* =========================
