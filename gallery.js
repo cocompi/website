@@ -1,9 +1,3 @@
-const savedLang = localStorage.getItem("lang");
-
-if (savedLang === "es" && window.location.pathname === "/") {
-  window.location.replace("/es/");
-}
-
 /* =========================
    GALLERY SYSTEM (UNCHANGED)
 ========================= */
