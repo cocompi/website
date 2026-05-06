@@ -202,23 +202,53 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 });
 
 /* =========================
-   LANGUAGE SYSTEM
+   GLOBAL LANGUAGE SYSTEM
 ========================= */
 
 (function () {
 
   const path = window.location.pathname;
 
-  let lang = "en";
-
-  if (path.includes("-es") || path.startsWith("/sobre")) {
-    lang = "es";
-  }
+  // detect language
+  let lang = path.startsWith("/es") || path.startsWith("/sobre")
+    ? "es"
+    : "en";
 
   localStorage.setItem("lang", lang);
 
+  // --- PAGE MAPPING ---
+  function getTranslatedPath(targetLang) {
+
+    let newPath = path;
+
+    if (targetLang === "es") {
+
+      // EN → ES
+      if (path === "/") newPath = "/es/";
+      else if (path === "/about") newPath = "/sobre";
+      else if (path.startsWith("/feedback")) newPath = "/es/feedback";
+
+    } else {
+
+      // ES → EN
+      if (path === "/es/" || path === "/es") newPath = "/";
+      else if (path === "/sobre") newPath = "/about";
+      else if (path.startsWith("/es/feedback")) newPath = "/feedback";
+
+    }
+
+    return newPath;
+  }
+
+  // --- APPLY LINKS ---
   document.querySelectorAll("[data-lang]").forEach(link => {
-    if (link.dataset.lang === lang) {
+
+    const targetLang = link.dataset.lang;
+
+    link.href = getTranslatedPath(targetLang);
+
+    // active state
+    if (targetLang === lang) {
       link.classList.add("active");
     } else {
       link.classList.remove("active");
