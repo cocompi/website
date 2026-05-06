@@ -211,17 +211,18 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 
   let lang = "en";
 
-  if (
-    path.startsWith("/sobre") ||
-    path.includes("-es")
-  ) {
+  if (path.includes("-es") || path.startsWith("/sobre")) {
     lang = "es";
   }
 
   localStorage.setItem("lang", lang);
 
   document.querySelectorAll("[data-lang]").forEach(link => {
-    link.classList.toggle("active", link.dataset.lang === lang);
+    if (link.dataset.lang === lang) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
   });
 
 })();
