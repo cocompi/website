@@ -559,52 +559,52 @@ hr {
 
 @media (max-width: 900px) {
 
-  /* =========================
-     NAV (STACKED)
-  ========================= */
-
+  /* NAV GRID RESTRUCTURE */
   .nav {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+      ". center right"
+      "left left right";
+    row-gap: 12px;
     align-items: center;
-    gap: 14px;
   }
 
   .nav-center {
-    order: 1;
+    grid-area: center;
+    justify-self: center;
   }
 
   .nav-left {
-    order: 2;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
+    grid-area: left;
+    justify-self: start;
+    align-items: flex-start;
   }
 
   .nav-right {
-    order: 3;
-    align-items: center;
-    text-align: center;
+    grid-area: right;
+    justify-self: end;
+    align-items: flex-end;
     gap: 8px;
   }
 
-  /* keep language + contact aligned */
-  .nav-right-bottom {
+  /* LANGUAGE TOGGLE = TOP RIGHT */
+  .lang-toggle {
+    align-self: start;
+  }
+
+  /* STACK LEFT LINKS CLEANLY */
+  .nav-left .nav-links {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
 
-  .nav-links {
-    gap: 10px;
+  /* STACK RIGHT LINKS CLEANLY */
+  .nav-right a {
+    display: block;
   }
 
-  /* scale title */
-  .nav-center h1 {
-    font-size: 28px;
-    letter-spacing: 0.05em;
-  }
+}
 
   /* =========================
      ABOUT PAGE
