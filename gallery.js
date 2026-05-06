@@ -202,27 +202,54 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 });
 
 /* =========================
-   LANGUAGE SYSTEM (FIXED)
+   GLOBAL LANGUAGE SYSTEM
 ========================= */
 
 (function () {
 
   const path = window.location.pathname;
 
-  let lang = "en";
-  if (path.startsWith("/es") || path.startsWith("/sobre")) {
-    lang = "es";
-  }
+  // detect language
+  let lang = (path.startsWith("/es") || path.startsWith("/sobre")) ? "es" : "en";
 
   localStorage.setItem("lang", lang);
 
-  // highlight active language
-  document.querySelectorAll("[data-lang]").forEach(link => {
-    if (link.dataset.lang === lang) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
+  function getTranslatedPath(targetLang) {
+
+    let newPath = path;
+
+    // --- ABOUT ---
+    if (path === "/about" || path === "/sobre") {
+      return targetLang === "es" ? "/sobre" : "/about";
     }
+
+    // --- HOME ---
+    if (path === "/" || path === "/es/" || path === "/es") {
+      return targetLang === "es" ? "/es/" : "/";
+    }
+
+    // --- WORK PAGES ---
+    if (path.startsWith("/es/")) {
+      // ES → EN
+      return path.replace("/es/", "/");
+    } else {
+      // EN → ES
+      return "/es" + path;
+    }
+  }
+
+  // apply toggle behavior
+  document.querySelectorAll(".lang-toggle a").forEach(link => {
+
+    const targetLang = link.dataset.lang;
+
+    link.classList.toggle("active", targetLang === lang);
+
+    link.addEventListener("click", () => {
+      const newPath = getTranslatedPath(targetLang);
+      window.location.href = newPath;
+    });
+
   });
 
 })();
