@@ -211,11 +211,12 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 
   // detect language
   let lang = "en";
-  if (path.startsWith("/es") || path.startsWith("/sobre")) {
+
+  if (path.startsWith("/es")) {
     lang = "es";
   }
 
-  // store
+  // store preference
   localStorage.setItem("lang", lang);
 
   // ✅ highlight GLOBAL toggle
@@ -223,12 +224,25 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
     link.classList.toggle("active", link.dataset.setLang === lang);
   });
 
-  // ✅ highlight NAV links (THIS WAS MISSING)
+  // ✅ highlight NAV links
   document.querySelectorAll("[data-lang]").forEach(link => {
     link.classList.toggle("active", link.dataset.lang === lang);
   });
 
-  // handle click (toggle)
+  // =========================
+  // HOME LINK (COCOMPI)
+  // =========================
+
+  const homeLink = document.getElementById("home-link");
+
+  if (homeLink) {
+    homeLink.setAttribute("href", lang === "es" ? "/es/" : "/");
+  }
+
+  // =========================
+  // LANGUAGE TOGGLE CLICK
+  // =========================
+
   document.querySelectorAll("[data-set-lang]").forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
@@ -236,13 +250,16 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
       const targetLang = link.dataset.setLang;
       let newPath = window.location.pathname;
 
+      // store new preference
+      localStorage.setItem("lang", targetLang);
+
       if (targetLang === "es") {
         if (!newPath.startsWith("/es")) {
           newPath = "/es" + (newPath === "/" ? "" : newPath);
         }
       } else {
         if (newPath.startsWith("/es")) {
-          newPath = newPath.replace("/es", "") || "/";
+          newPath = newPath.replace(/^\/es/, "") || "/";
         }
       }
 
