@@ -429,18 +429,6 @@ hr {
   opacity: 1;
 }
 
-.work-lang-switch {
-  margin-bottom: 8px;
-}
-
-.work-lang-switch a {
-  opacity: 0.5;
-}
-
-.work-lang-switch a.active {
-  opacity: 1;
-}
-
 /* =========================
    WORK PAGE
 ========================= */
@@ -586,4 +574,25 @@ hr {
   .work-meta {
     grid-template-columns: 1fr; /* 🔴 stack on mobile */
   }
+}
+
+/* GLOBAL LANGUAGE TOGGLE */
+.lang-toggle {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.lang-toggle a {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.lang-toggle a.active {
+  opacity: 1;
+}
+
+.lang-toggle a:hover {
+  opacity: 1;
 }
