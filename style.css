@@ -175,8 +175,9 @@ h2 {
   display: inline-flex;
   gap: 6px;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 12px;
+  font-family: "Inter", -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .lang-toggle a {
