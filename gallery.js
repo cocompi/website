@@ -251,8 +251,6 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
 
     const targetLang = link.dataset.lang;
 
-    link.href = getTranslatedPath(targetLang);
-
     // active state
     if (targetLang === lang) {
       link.classList.add("active");
