@@ -254,6 +254,15 @@ hr {
   width: calc(33.333% - 10px); /* temporary grid */
 }
 
+.gallery {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.gallery.ready {
+  opacity: 1;
+}
+
 /* =========================
    END OF TEMP GALLERY
 ========================= */
