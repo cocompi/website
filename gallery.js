@@ -138,23 +138,40 @@ document.querySelectorAll(".gallery").forEach(gallery => {
   //}
 
 function waitForImagesAndLayout() {
+
   const images = gallery.querySelectorAll("img");
 
-  images.forEach(img => {
-    if (img.complete) {
-      layout(); // 🔴 layout immediately
-    } else {
-      img.onload = () => layout(); // 🔴 relayout per image
-    }
+  const promises = Array.from(images).map(img => {
+
+    return new Promise(resolve => {
+
+      if (img.complete && img.naturalWidth > 0) {
+        resolve();
+      } else {
+        img.onload = resolve;
+        img.onerror = resolve;
+      }
+
+    });
+
   });
-   
-  // 🔴 fallback (runs instantly)
-  layout();
+
+  Promise.all(promises).then(() => {
+
+    requestAnimationFrame(() => {
+      layout();
+
+      // reveal only AFTER layout
+      gallery.classList.add("ready");
+    });
+
+  });
+
 }
    
 //end of change
    
-  window.addEventListener("load", waitForImagesAndLayout);
+  waitForImagesAndLayout();
 
   let resizeTimer;
   window.addEventListener("resize", () => {
