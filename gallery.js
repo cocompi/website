@@ -1,4 +1,19 @@
 /* =========================
+   LOAD REUSABLE HEADER
+========================= */
+
+fetch("/partials/header.html")
+  .then(res => res.text())
+  .then(data => {
+
+    document.getElementById("site-header").innerHTML = data;
+
+    // initialize nav AFTER loading
+    initLanguageSystem();
+
+  });
+
+/* =========================
    GALLERY SYSTEM (UNCHANGED)
 ========================= */
 
@@ -222,7 +237,7 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
    GLOBAL LANGUAGE SYSTEM
 ========================= */
 
-(function () {
+function initLanguageSystem () {
 
   const path = window.location.pathname;
 
@@ -284,4 +299,4 @@ document.querySelectorAll(".about-slideshow").forEach(slideshow => {
     });
   });
 
-})();
+}
