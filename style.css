@@ -669,4 +669,21 @@ hr {
     aspect-ratio: 16 / 9;
   }
 
+	  /* =========================
+     MOBILE GALLERY CAPTIONS
+  ========================= */
+
+  .item .caption {
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.25;
+    letter-spacing: 0.015em;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
 }
